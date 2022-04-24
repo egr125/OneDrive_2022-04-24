@@ -1,0 +1,52 @@
+﻿@model MediaUI.Data.Comment
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<div class="row">
+    <div class="col-md">
+        <form asp-action="CreateCommentPartial">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ReportId" class="control-label" hidden></label>
+                <input asp-for="ReportId" class="form-control" value="@Model.ReportId" hidden />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Report" class="control-label" hidden></label>
+                <input asp-for="Report" class="form-control" value="@Model.Report" hidden />
+
+            </div>
+            <div class="d-flex mb-3">
+
+                <div class="form-outline w-100">
+                    <textarea asp-for="Descritption" class="form-control" class="form-control" id="textAreaExample" rows="2" placeholder="Write your comment..."></textarea>
+
+                </div>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="Descritption" class="control-label"></label>
+                <input asp-for="Descritption" class="form-control" />
+                <span asp-validation-for="Descritption" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="CreatedBy" class="control-label" hidden></label>
+                <input asp-for="CreatedBy" class="form-control" value="@UserManager.GetUserId(User)" hidden />
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label" hidden></label>
+                <input asp-for="CreatedDate" class="form-control" hidden />
+                <span asp-validation-for="CreatedDate" class="text-danger" hidden></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Comment" class="btn btn-primary mb-5" @Url.Action("", "Post") />
+                @*<button type="button" class="btn btn-primary mb-5">Comment</button>*@
+
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

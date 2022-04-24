@@ -1,0 +1,123 @@
+﻿@model IEnumerable<MediaUI.Data.Post>
+
+@{ ViewData["Title"] = "Index"; }
+
+<h1>Posts</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+<div class="row">
+    <!--Section: Newsfeed-->
+    <section class="col-md-7">
+        @foreach (var item in Model)
+        {
+<div class="card" style="max-width: 42rem">
+    <div class="card-body">
+        <!-- Data -->
+        <div class="d-flex mb-3">
+
+            <div>
+                <div class="text-dark mb-0">
+                    <strong> @Html.DisplayFor(modelItem => item.Title)</strong>
+                </div>
+                <div class="text-dark mb-0">
+                    <span> @Html.DisplayFor(modelItem => item.Category)</span>
+                </div>
+                <div class="text-muted d-block" style="margin-top: -6px">
+                    <small> @Html.DisplayFor(modelItem => item.CreatedDate)</small>
+                </div>
+            </div>
+        </div>
+        <!-- Description -->
+        <div>
+            <p>
+                @Html.DisplayFor(modelItem => item.Report)
+            </p>
+        </div>
+        <div class="text-muted d-block" style="margin-top: -6px">
+            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.Id">Click to view or add comments</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        </div>
+
+    </div>
+    <div>
+        @*@{Html.RenderPartial("_DetailsCommentsView");}*@
+    </div> <div>
+        @*@{Html.RenderPartial("_DetailsCommentsView");}*@
+    </div>
+
+</div>}
+    </section>
+    <section class="form-actions no-color col-md-5">
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    Find by Category: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" /> <br />
+                    @*<input type="submit" value="Search" class="btn btn-link" /> |*@
+                    <a asp-action="Index">Back to Full List</a> |
+                    <a asp-action="MyPosts">My Posts</a>
+
+
+                </p>
+            </div>
+        </form>
+    </section>
+
+</div>
+
+<!--Section: old Newsfeed-->
+
+@*<div class="row">
+    <div class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Category)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Report)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Report)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        </td>
+    </tr>}
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>*@
+<!--End Section: old Newsfeed-->
